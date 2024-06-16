@@ -6,28 +6,24 @@
 //
 let mainGame = MainGame()
 let input = CustomReadLine()
-mainGame.start()
 
-while true {
-    var strike: Int = 0
-    var ball: Int = 0
+while true { //이렇게 해야 while문 탈출 구글 찾아봄
+    print(Message.welcome)
+    print(Message.selectNum)
     
-    let maching: [Int: Int] = Dictionary(uniqueKeysWithValues: zip(mainGame.answerArr, input.customReadLine("숫자를 입력해 주세요.")))
-    
-    for (key, value) in maching {
-        if key == value {
-            strike += 1
-        } else if maching.keys.contains(value) {
-            ball += 1
-        }
-    }
-    
-    if strike == 3 {
-        print("게임 끝")
+    switch input.selectReadLine() {
+    case 1 :
+        mainGame.gameStart()
+        continue
+    case 2 :
+        mainGame.gameHistoryList()
+        continue
+    case 3 :
+        print(Message.gameEnd)
         break
-    } else if strike != 0 || ball != 0 {
-        print("\(strike)스트라이크, \(ball)볼")
-    } else {
-        print("Nothing")
+    default:
+        print(Message.selectError)
+        break
     }
+    break
 }
